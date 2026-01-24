@@ -4,7 +4,7 @@ project(ShrimpleWeather LANGUAGES CXX)
 set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.8
-    REQUIRED COMPONENTS Core Widgets
+    REQUIRED COMPONENTS Core Widgets Network
 )
 
 qt_standard_project_setup()
@@ -13,17 +13,23 @@ qt_add_executable(${PROJECT_NAME}
     src/main.cpp
     src/window.h
     src/window.cpp
+    src/search_bar.h
+    src/search_bar.cpp
+    src/weather_data.h
+    src/weather_data.cpp
 )
 
 qt_add_resources(${PROJECT_NAME}
     PREFIX "/"
     FILES
         assets/fonts/Inter.ttf
+        assets/styles/stylesheet.qss
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt::Core
     Qt::Widgets
+    Qt::Network
 )
 
 install(

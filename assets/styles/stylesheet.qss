@@ -1,0 +1,61 @@
+#Window {
+    background-color: #F5F4F2;
+    color: #171717;
+}
+
+#SearchBar {
+    background-color: #4B4B31;
+    color: #F5F4F2;
+}
+
+#WeatherData {
+    background-color: #F5F4F2;
+    color: #171717;
+}
+
+#SearchLabel {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+QPushButton {
+    padding: 0 16px;
+    height: 30px;
+    min-width: 120px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    background-color: #fe621c;
+    color: #F5F4F2;
+    border: none;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #E26831;
+    color: #F5F4F2;
+    border: none;
+    border-radius: 6px;
+}
+
+QPushButton:pressed {
+    background-color: #C9693E;
+    color: #F5F4F2;
+    border: none;
+    border-radius: 6px;
+}
+
+QLineEdit {
+    padding: 0 8px;
+    height: 30px;
+    min-width: 120px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    background-color: #fafafa;
+    color: #171717;
+    border: none;
+    border-radius: 6px;
+}
