@@ -8,17 +8,11 @@ Hourly::Hourly(QWidget* parent) : QWidget(parent)
     setMaximumWidth(600);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // scroll = new QScrollArea(this);
-    // scroll->setFixedHeight(400);
-    // scroll->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    // scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    // scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    layout = new QVBoxLayout(this);
+    layout->setContentsMargins(16, 16, 16, 16);
+    layout->setSpacing(8);
 
-    list = new QVBoxLayout(this);
-    list->setContentsMargins(16, 16, 16, 16);
-    list->setSpacing(8);
-
-    // scroll->setLayout(list);
+    setLayout(layout);
 }
 
 Hourly::~Hourly()
@@ -43,6 +37,6 @@ void Hourly::handleRefresh(API::Response& response)
         label->setText(text);
 
         labels.append(label);
-        list->addWidget(label);
+        layout->addWidget(label);
     }
 }

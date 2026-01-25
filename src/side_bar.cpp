@@ -22,6 +22,8 @@ SideBar::SideBar(QWidget* parent) : QWidget(parent)
 
     connect(searchBar, &SearchBar::onSearch, this, &SideBar::handleSearch);
     connect(manager, &QNetworkAccessManager::finished, this, &SideBar::handleNetworkReply);
+
+    setLayout(layout);
 }
 
 SideBar::~SideBar()

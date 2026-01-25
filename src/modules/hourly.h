@@ -15,8 +15,7 @@ class Hourly : public QWidget
     Q_OBJECT
 
 private:
-    QPointer<QScrollArea>   scroll = nullptr;
-    QPointer<QVBoxLayout>   list   = nullptr;
+    QPointer<QVBoxLayout>   layout   = nullptr;
     QList<QPointer<QLabel>> labels = {};
 
 public:

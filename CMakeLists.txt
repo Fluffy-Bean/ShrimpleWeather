@@ -32,6 +32,7 @@ qt_add_resources(${PROJECT_NAME}
     PREFIX "/"
     FILES
         assets/fonts/Inter.ttf
+        assets/fonts/MaterialSymbolsOutlined.ttf
         assets/styles/stylesheet.qss
 )
 

@@ -6,9 +6,9 @@ SavedLocations::SavedLocations(QWidget* parent) : QWidget(parent)
     setAttribute(Qt::WA_StyledBackground, true);
     setAutoFillBackground(true);
 
-    list = new QVBoxLayout(this);
-    list->setContentsMargins(0, 0, 0, 0);
-    list->setSpacing(0);
+    layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
     for (int i = 0; i < 10; ++i)
     {
@@ -17,8 +17,10 @@ SavedLocations::SavedLocations(QWidget* parent) : QWidget(parent)
         button->setText("Location Button");
 
         locationButtons.append(button);
-        list->addWidget(button);
+        layout->addWidget(button);
     }
+
+    setLayout(layout);
 }
 
 SavedLocations::~SavedLocations()

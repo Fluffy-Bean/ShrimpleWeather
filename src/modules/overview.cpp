@@ -8,9 +8,9 @@ Overview::Overview(QWidget* parent) : QWidget(parent)
     setMaximumWidth(600);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    list = new QVBoxLayout(this);
-    list->setContentsMargins(0, 0, 0, 0);
-    list->setSpacing(8);
+    layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(8);
 
     townLabel = new QLabel(this);
     townLabel->setObjectName("Town");
@@ -20,8 +20,10 @@ Overview::Overview(QWidget* parent) : QWidget(parent)
     tempLabel->setObjectName("Temperature");
     tempLabel->setText("TEMPERATURE");
 
-    list->addWidget(townLabel);
-    list->addWidget(tempLabel);
+    layout->addWidget(townLabel);
+    layout->addWidget(tempLabel);
+
+    setLayout(layout);
 }
 
 Overview::~Overview()

@@ -6,12 +6,19 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
     manager = new QNetworkAccessManager();
 
-    const int fontID         = QFontDatabase::addApplicationFont(":/assets/fonts/Inter.ttf");
-    const QString fontFamily = QFontDatabase::applicationFontFamilies(fontID).at(0);
-    QFont font(fontFamily);
-    font.setPixelSize(13);
+    {
+        const int     fontID     = QFontDatabase::addApplicationFont(":/assets/fonts/MaterialSymbolsOutlined.ttf");
+        const QString fontFamily = QFontDatabase::applicationFontFamilies(fontID).at(0);
+    }
 
-    setFont(font);
+    {
+        const int fontID         = QFontDatabase::addApplicationFont(":/assets/fonts/Inter.ttf");
+        const QString fontFamily = QFontDatabase::applicationFontFamilies(fontID).at(0);
+        QFont font(fontFamily);
+        font.setPixelSize(13);
+
+        setFont(font);
+    }
 
     QFile file(":/assets/styles/stylesheet.qss");
     file.open(QFile::ReadOnly);
@@ -22,15 +29,15 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     root = new QWidget(this);
     this->setCentralWidget(root);
 
-    rootLayout = new QHBoxLayout(root);
-    rootLayout->setContentsMargins(0, 0, 0, 0);
-    rootLayout->setSpacing(0);
+    layout = new QHBoxLayout(root);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
     sideBar        = new SideBar(root);
     weatherDisplay = new WeatherDisplay(root);
 
-    rootLayout->addWidget(sideBar);
-    rootLayout->addWidget(weatherDisplay);
+    layout->addWidget(sideBar);
+    layout->addWidget(weatherDisplay);
 
     connect(sideBar, &SideBar::onLocationSelection, this, &Window::handleLocationSelection);
     connect(manager, &QNetworkAccessManager::finished, this, &Window::handleNetworkReply);

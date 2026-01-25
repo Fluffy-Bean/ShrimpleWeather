@@ -16,7 +16,7 @@ public:
     ~SavedLocations();
 
 private:
-    QPointer<QVBoxLayout>        list            = nullptr;
+    QPointer<QVBoxLayout>        layout            = nullptr;
     QList<QPointer<QPushButton>> locationButtons = {};
 
 private slots:

@@ -13,7 +13,7 @@ class Overview : public QWidget
     Q_OBJECT
 
 private:
-    QPointer<QVBoxLayout> list      = nullptr;
+    QPointer<QVBoxLayout> layout      = nullptr;
     QPointer<QLabel>      townLabel = nullptr;
     QPointer<QLabel>      tempLabel = nullptr;
 

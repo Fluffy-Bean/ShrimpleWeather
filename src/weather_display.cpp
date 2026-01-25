@@ -19,6 +19,8 @@ WeatherDisplay::WeatherDisplay(QWidget* parent) : QWidget(parent)
     layout->addWidget(overview);
     layout->addWidget(hourly);
     layout->addStretch();
+
+    setLayout(layout);
 }
 
 WeatherDisplay::~WeatherDisplay()

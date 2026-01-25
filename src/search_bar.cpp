@@ -9,7 +9,7 @@ SearchBar::SearchBar(QWidget* parent) : QWidget(parent)
     layout = new QHBoxLayout(this);
     layout->setAlignment(Qt::AlignCenter);
     layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(16);
+    layout->setSpacing(0);
 
     searchBox = new QLineEdit(this);
     searchBox->setObjectName("SearchBox");
@@ -19,12 +19,14 @@ SearchBar::SearchBar(QWidget* parent) : QWidget(parent)
     searchButton = new QPushButton(this);
     searchButton->setObjectName("SearchButton");
     searchButton->setFlat(true);
-    searchButton->setText("Search");
+    searchButton->setText("search");
 
     layout->addWidget(searchBox);
     layout->addWidget(searchButton);
 
     connect(searchButton, &QPushButton::clicked, this, &SearchBar::handleClick);
+
+    setLayout(layout);
 }
 
 SearchBar::~SearchBar()

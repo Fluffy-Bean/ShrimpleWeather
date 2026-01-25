@@ -19,27 +19,32 @@
     background-color: #F5F4F2;
     color: #171717;
     border: none;
-    border-radius: 6px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 #SearchBar QPushButton {
-    padding: 0 8px;
+    padding: 0;
     height: 30px;
-    min-width: 80px;
+    width: 32px;
 
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Material Symbols Outlined";
 
-    background-color: #4B4B31;
-    color: #F5F4F2;
+    background-color: #F5F4F2;
+    color: #171717;
     border: none;
-    border-radius: 6px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 #SearchBar QPushButton:hover {
-    background-color: #3D3D27;
+    background-color: #4B4B31;
+    color: #F5F4F2;
 }
 #SearchBar QPushButton:pressed {
-   background-color: #30301F;
+   background-color: #3D3D27;
+    color: #F5F4F2;
 }
 
 #SavedLocations QPushButton {
@@ -54,7 +59,7 @@
     background-color: #FFFFFF;
     color: #171717;
     border: none;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 #SavedLocations QPushButton:hover {
     background-color: #F5F4F2;
@@ -82,7 +87,7 @@
 }
 
 #Hourly {
-    border-radius: 10px;
     background-color: #FFFFFF;
     color: #171717;
+    border-radius: 3px;
 }

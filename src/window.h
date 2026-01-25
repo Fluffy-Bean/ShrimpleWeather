@@ -24,7 +24,7 @@ private:
     QNetworkRequest                 weatherReq      = {};
 
     QPointer<QWidget>               root            = nullptr;
-    QPointer<QHBoxLayout>           rootLayout      = nullptr;
+    QPointer<QHBoxLayout>           layout      = nullptr;
     QPointer<SideBar>               sideBar         = nullptr;
     QPointer<WeatherDisplay>        weatherDisplay  = nullptr;
 
