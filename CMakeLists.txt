@@ -11,12 +11,19 @@ qt_standard_project_setup()
 
 qt_add_executable(${PROJECT_NAME}
     src/main.cpp
+    src/weather.h
     src/window.h
     src/window.cpp
+    src/side_bar.h
+    src/side_bar.cpp
     src/search_bar.h
     src/search_bar.cpp
-    src/weather_data.h
-    src/weather_data.cpp
+    src/saved_locations.h
+    src/saved_locations.cpp
+    src/weather_display.h
+    src/weather_display.cpp
+    src/overview.h
+    src/overview.cpp
 )
 
 qt_add_resources(${PROJECT_NAME}

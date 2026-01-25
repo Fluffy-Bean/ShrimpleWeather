@@ -1,17 +1,6 @@
-#include <QFontDatabase>
-#include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QObject>
-#include <QPushButton>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QFile>
-
 #include "window.h"
-#include "search_bar.h"
-#include "weather_data.h"
+#include "side_bar.h"
+#include "weather_display.h"
 
 Window::Window(QWidget *parent) : QMainWindow(parent)
 {
@@ -35,19 +24,18 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     root = new QWidget(this);
     this->setCentralWidget(root);
 
-    rootLayout = new QVBoxLayout(root);
+    rootLayout = new QHBoxLayout(root);
     rootLayout->setContentsMargins(0, 0, 0, 0);
     rootLayout->setSpacing(0);
 
-    searchBar = new SearchBar(root);
+    sideBar        = new SideBar(root);
+    weatherDisplay = new WeatherDisplay(root);
 
-    weatherData = new WeatherData(root);
+    rootLayout->addWidget(sideBar);
+    rootLayout->addWidget(weatherDisplay);
 
-    rootLayout->addWidget(searchBar);
-    rootLayout->addWidget(weatherData);
-
-    connect(searchBar, &SearchBar::onSearch, this, &Window::handleSearch);
-    connect(manager, &QNetworkAccessManager::finished, this, &Window::handleNetworkRequest);
+    connect(sideBar, &SideBar::onLocationSelection, this, &Window::handleLocationSelection);
+    connect(manager, &QNetworkAccessManager::finished, this, &Window::handleNetworkReply);
 }
 
 Window::~Window()
@@ -55,36 +43,21 @@ Window::~Window()
     delete manager;
 }
 
-void Window::updateLocation(QStringView query)
+void Window::handleLocationSelection(Location& location)
 {
-    QString url = QString("https://geocoding-api.open-meteo.com/v1/search?name=%1&count=%2")
-        .arg(query)
+    currentLocation = location;
+
+    QString url = QString("https://api.open-meteo.com/v1/forecast?latitude=%1&longitude=%2&current=temperature_2m,rain&forecast_days=%3")
+        .arg(location.latitude)
+        .arg(location.longitude)
         .arg(1);
 
-    locationRequest.setUrl(QUrl(url));
+    weatherReq.setUrl(QUrl(url));
 
-    manager->get(locationRequest);
+    manager->get(weatherReq);
 }
 
-void Window::updateWeatherData()
-{
-    QString url = QString("https://api.open-meteo.com/v1/forecast?latitude=%1&longitude=%2&current=temperature_2m,rain&forecast_days=1")
-        .arg(latitude)
-        .arg(longitude);
-
-    weatherRequest.setUrl(QUrl(url));
-
-    manager->get(weatherRequest);
-}
-
-void Window::handleSearch(QStringView query)
-{
-    qDebug() << "Got search:" << query;
-
-    updateLocation(query);
-}
-
-void Window::handleNetworkRequest(QNetworkReply* reply)
+void Window::handleNetworkReply(QNetworkReply* reply)
 {
     if (reply == nullptr)
     {
@@ -105,37 +78,15 @@ void Window::handleNetworkRequest(QNetworkReply* reply)
 
     qDebug() << jsonObject;
 
-    if (source == weatherRequest)
+    if (source == weatherReq)
     {
-        WeatherData::Data data = {};
+        Weather data = {};
 
-        data.temperatureUnit = jsonObject
-            .take("current_units").toObject()
-            .take("temperature_2m").toString();
+        data.location        = currentLocation;
+        data.temperature     = jsonObject.take("current").toObject().take("temperature_2m").toDouble();
+        data.temperatureUnit = jsonObject.take("current_units").toObject().take("temperature_2m").toString();
 
-        data.temperatureValue = jsonObject
-            .take("current").toObject()
-            .take("temperature_2m").toDouble();
-
-        weatherData->handleRefresh(data);
-    }
-    else if (source == locationRequest)
-    {
-        QJsonObject result = jsonObject
-            .take("results").toArray()
-            .at(0).toObject();
-
-        qDebug() << result;
-
-        longitude = result
-            .take("longitude").toDouble();
-
-        latitude = result
-            .take("latitude").toDouble();
-
-        qDebug() << longitude << latitude;
-
-        updateWeatherData();
+        weatherDisplay->handleRefresh(data);
     }
     else
     {

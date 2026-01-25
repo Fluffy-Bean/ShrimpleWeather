@@ -1,41 +1,37 @@
 #pragma once
 
+#include <QLabel>
+#include <QLayout>
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPushButton>
-#include <QLabel>
+#include <QPointer>
 
-#include "search_bar.h"
-#include "weather_data.h"
+#include "side_bar.h"
+#include "weather_display.h"
+#include "window.h"
 
 class Window : public QMainWindow
 {
     Q_OBJECT
 
 private:
-    QNetworkAccessManager* manager         = nullptr;
-    QNetworkRequest        locationRequest = {};
-    QNetworkRequest        weatherRequest  = {};
+    Location                        currentLocation = {};
 
-    QWidget*               root            = nullptr;
-    QVBoxLayout*           rootLayout      = nullptr;
-    SearchBar*             searchBar       = nullptr;
-    WeatherData*           weatherData     = nullptr;
+    QPointer<QNetworkAccessManager> manager         = nullptr;
+    QNetworkRequest                 weatherReq      = {};
 
-    // Defaults to Brighton, though this gets reset on the first query anyway...
-    double                 longitude       = -0.1395;
-    double                 latitude        = 50.8284;
+    QPointer<QWidget>               root            = nullptr;
+    QPointer<QHBoxLayout>           rootLayout      = nullptr;
+    QPointer<SideBar>               sideBar         = nullptr;
+    QPointer<WeatherDisplay>        weatherDisplay  = nullptr;
 
 public:
     Window(QWidget* parent = nullptr);
     ~Window();
 
-private:
-    void updateLocation(QStringView query);
-    void updateWeatherData();
-
 private slots:
-    void handleSearch(QStringView query);
-    void handleNetworkRequest(QNetworkReply* reply);
+    void handleLocationSelection(Location& location);
+    void handleNetworkReply(QNetworkReply* reply);
 };

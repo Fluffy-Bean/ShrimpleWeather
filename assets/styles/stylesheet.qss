@@ -1,61 +1,82 @@
 #Window {
-    background-color: #F5F4F2;
+    background-color: #FFFFFF;
     color: #171717;
 }
 
-#SearchBar {
-    background-color: #4B4B31;
-    color: #F5F4F2;
-}
-
-#WeatherData {
-    background-color: #F5F4F2;
+#SideBar {
+    background-color: #FFFFFF;
     color: #171717;
 }
 
-#SearchLabel {
-    font-size: 32px;
-    font-weight: 800;
-}
-
-QPushButton {
-    padding: 0 16px;
-    height: 30px;
-    min-width: 120px;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    background-color: #fe621c;
-    color: #F5F4F2;
-    border: none;
-    border-radius: 6px;
-}
-
-QPushButton:hover {
-    background-color: #E26831;
-    color: #F5F4F2;
-    border: none;
-    border-radius: 6px;
-}
-
-QPushButton:pressed {
-    background-color: #C9693E;
-    color: #F5F4F2;
-    border: none;
-    border-radius: 6px;
-}
-
-QLineEdit {
+#SearchBar QLineEdit {
     padding: 0 8px;
     height: 30px;
-    min-width: 120px;
+    min-width: 130px;
 
     font-size: 13px;
     font-weight: 500;
 
-    background-color: #fafafa;
+    background-color: #F5F4F2;
     color: #171717;
     border: none;
     border-radius: 6px;
+}
+
+#SearchBar QPushButton {
+    padding: 0 8px;
+    height: 30px;
+    min-width: 80px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    background-color: #4B4B31;
+    color: #F5F4F2;
+    border: none;
+    border-radius: 6px;
+}
+#SearchBar QPushButton:hover {
+    background-color: #3D3D27;
+}
+#SearchBar QPushButton:pressed {
+   background-color: #30301F;
+}
+
+#SavedLocations QPushButton {
+    padding: 0 8px;
+    height: 50px;
+    min-width: 80px;
+
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+
+    background-color: #FFFFFF;
+    color: #171717;
+    border: none;
+    border-radius: 6px;
+}
+#SavedLocations QPushButton:hover {
+    background-color: #F5F4F2;
+}
+#SavedLocations QPushButton:pressed {
+    background-color: #F5F4F2;
+}
+
+#WeatherDisplay {
+    background-color: #F5F4F2;
+    color: #171717;
+}
+
+#Overview {
+    background-color: transparent;
+}
+
+#Overview #Town {
+    font-size: 24px;
+}
+
+#Overview #Temperature {
+    font-size: 36px;
+    font-weight: 700;
 }
