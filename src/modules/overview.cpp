@@ -28,12 +28,8 @@ Overview::~Overview()
 {
 }
 
-void Overview::handleTownUpdate(QString name)
+void Overview::handleRefresh(API::Response& response)
 {
-    townLabel->setText(name);
-}
-
-void Overview::handleTemperatureUpdate(double value, QStringView unit)
-{
-    tempLabel->setText(QString("%1 %2").arg(value).arg(unit));
+    townLabel->setText(response.location.name);
+    tempLabel->setText(QString("%1 %2").arg(response.current.temperature).arg(response.units.temperature));
 }

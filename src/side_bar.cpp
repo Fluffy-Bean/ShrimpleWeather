@@ -66,7 +66,7 @@ void SideBar::handleNetworkReply(QNetworkReply* reply)
     {
         QJsonObject result = jsonObject.take("results").toArray().at(0).toObject();
 
-        Location location = {};
+        API::Location location = {};
 
         location.name      = result.take("name").toString();
         location.longitude = result.take("longitude").toDouble();

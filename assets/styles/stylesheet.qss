@@ -80,3 +80,9 @@
     font-size: 36px;
     font-weight: 700;
 }
+
+#Hourly {
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #171717;
+}

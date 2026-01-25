@@ -8,9 +8,9 @@
 #include <QPointer>
 #include <QWidget>
 
+#include "api.h"
 #include "saved_locations.h"
 #include "search_bar.h"
-#include "weather.h"
 
 class SideBar : public QWidget
 {
@@ -33,5 +33,5 @@ private slots:
     void handleNetworkReply(QNetworkReply* reply);
 
 signals:
-    void onLocationSelection(Location& location);
+    void onLocationSelection(API::Location& location);
 };

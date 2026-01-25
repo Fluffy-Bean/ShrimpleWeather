@@ -12,23 +12,25 @@
 #include <QPointer>
 #include <QWidget>
 
-#include "overview.h"
-#include "weather.h"
+#include "api.h"
+#include "modules/hourly.h"
+#include "modules/overview.h"
 
 class WeatherDisplay : public QWidget
 {
     Q_OBJECT
 
 private:
-    Weather               currentWeather = {};
+    API::Response               currentWeather = {};
 
     QPointer<QVBoxLayout> layout         = nullptr;
     QPointer<Overview>    overview       = nullptr;
+    QPointer<Hourly>      hourly         = nullptr;
 
 public:
     WeatherDisplay(QWidget* parent = nullptr);
     ~WeatherDisplay();
 
 public slots:
-    void handleRefresh(Weather& data);
+    void handleRefresh(API::Response& response);
 };

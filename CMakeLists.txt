@@ -11,7 +11,7 @@ qt_standard_project_setup()
 
 qt_add_executable(${PROJECT_NAME}
     src/main.cpp
-    src/weather.h
+    src/api.h
     src/window.h
     src/window.cpp
     src/side_bar.h
@@ -22,8 +22,10 @@ qt_add_executable(${PROJECT_NAME}
     src/saved_locations.cpp
     src/weather_display.h
     src/weather_display.cpp
-    src/overview.h
-    src/overview.cpp
+    src/modules/overview.h
+    src/modules/overview.cpp
+    src/modules/hourly.h
+    src/modules/hourly.cpp
 )
 
 qt_add_resources(${PROJECT_NAME}

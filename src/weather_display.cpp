@@ -14,8 +14,10 @@ WeatherDisplay::WeatherDisplay(QWidget* parent) : QWidget(parent)
     layout->setSpacing(16);
 
     overview = new Overview(this);
+    hourly   = new Hourly(this);
 
     layout->addWidget(overview);
+    layout->addWidget(hourly);
     layout->addStretch();
 }
 
@@ -23,8 +25,8 @@ WeatherDisplay::~WeatherDisplay()
 {
 }
 
-void WeatherDisplay::handleRefresh(Weather& data)
+void WeatherDisplay::handleRefresh(API::Response& response)
 {
-    overview->handleTownUpdate(data.location.name);
-    overview->handleTemperatureUpdate(data.temperature, data.temperatureUnit);
+    overview->handleRefresh(response);
+    hourly->handleRefresh(response);
 }

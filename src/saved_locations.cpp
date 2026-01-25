@@ -23,6 +23,7 @@ SavedLocations::SavedLocations(QWidget* parent) : QWidget(parent)
 
 SavedLocations::~SavedLocations()
 {
+    qDeleteAll(locationButtons);
     locationButtons.clear();
 }
 

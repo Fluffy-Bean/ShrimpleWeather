@@ -6,6 +6,8 @@
 #include <QString>
 #include <QWidget>
 
+#include "../api.h"
+
 class Overview : public QWidget
 {
     Q_OBJECT
@@ -20,6 +22,5 @@ public:
     ~Overview();
 
 public slots:
-    void handleTownUpdate(QString name);
-    void handleTemperatureUpdate(double value, QStringView unit);
+    void handleRefresh(API::Response& response);
 };

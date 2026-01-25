@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QPointer>
 
+#include "api.h"
 #include "side_bar.h"
 #include "weather_display.h"
 #include "window.h"
@@ -17,7 +18,7 @@ class Window : public QMainWindow
     Q_OBJECT
 
 private:
-    Location                        currentLocation = {};
+    API::Location                   currentLocation = {};
 
     QPointer<QNetworkAccessManager> manager         = nullptr;
     QNetworkRequest                 weatherReq      = {};
@@ -32,6 +33,6 @@ public:
     ~Window();
 
 private slots:
-    void handleLocationSelection(Location& location);
+    void handleLocationSelection(API::Location& location);
     void handleNetworkReply(QNetworkReply* reply);
 };
