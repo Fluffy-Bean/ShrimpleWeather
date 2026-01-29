@@ -69,6 +69,7 @@
 }
 
 #WeatherDisplay {
+    border: 0 solid transparent;
     background-color: #F5F4F2;
     color: #171717;
 }

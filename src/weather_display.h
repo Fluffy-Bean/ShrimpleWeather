@@ -9,6 +9,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QScrollArea>
 #include <QPointer>
 #include <QWidget>
 
@@ -16,13 +17,14 @@
 #include "modules/hourly.h"
 #include "modules/overview.h"
 
-class WeatherDisplay : public QWidget
+class WeatherDisplay : public QScrollArea
 {
     Q_OBJECT
 
 private:
-    API::Response               currentWeather = {};
+    API::Response         currentWeather = {};
 
+    QPointer<QWidget>     container      = nullptr;
     QPointer<QVBoxLayout> layout         = nullptr;
     QPointer<Overview>    overview       = nullptr;
     QPointer<Hourly>      hourly         = nullptr;

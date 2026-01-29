@@ -1,26 +1,31 @@
 #include "weather_display.h"
 
-WeatherDisplay::WeatherDisplay(QWidget* parent) : QWidget(parent)
+WeatherDisplay::WeatherDisplay(QWidget* parent) : QScrollArea(parent)
 {
     setObjectName("WeatherDisplay");
-    setAttribute(Qt::WA_StyledBackground, true);
-    setAutoFillBackground(true);
     setMinimumWidth(600);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    setWidgetResizable(true);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    layout = new QVBoxLayout(this);
+    container = new QWidget(this);
+    // container->setAttribute(Qt::WA_StyledBackground, true);
+    // container->setAutoFillBackground(true);
+
+    layout = new QVBoxLayout(container);
     layout->setAlignment(Qt::AlignHCenter);
     layout->setContentsMargins(16, 16, 16, 16);
     layout->setSpacing(16);
 
-    overview = new Overview(this);
-    hourly   = new Hourly(this);
+    overview = new Overview(container);
+    hourly   = new Hourly(container);
 
     layout->addWidget(overview);
     layout->addWidget(hourly);
     layout->addStretch();
 
-    setLayout(layout);
+    setWidget(container);
 }
 
 WeatherDisplay::~WeatherDisplay()
