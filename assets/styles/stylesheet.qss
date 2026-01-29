@@ -136,3 +136,18 @@ QScrollBar::sub-page:vertical {
     color: #171717;
     border-radius: 3px;
 }
+
+#HourlyGraph {
+    background-color: #FFFFFF;
+    color: #171717;
+    border-radius: 3px;
+}
+#HourlyGraph QChartView {
+    background-color: #FFFFFF;
+}
+#HourlyGraph QChart {
+    background-color: #FFFFFF;
+}
+#HourlyGraph QLineSeries {
+    background-color: #FFFFFF;
+}

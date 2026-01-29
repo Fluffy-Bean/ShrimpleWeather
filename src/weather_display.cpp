@@ -19,10 +19,12 @@ WeatherDisplay::WeatherDisplay(QWidget* parent) : QScrollArea(parent)
     layout->setContentsMargins(16, 16, 16, 16);
     layout->setSpacing(16);
 
-    overview = new Overview(container);
-    hourly   = new Hourly(container);
+    overview    = new Overview(container);
+    hourlyGraph = new HourlyGraph(container);
+    hourly      = new Hourly(container);
 
     layout->addWidget(overview);
+    layout->addWidget(hourlyGraph);
     layout->addWidget(hourly);
     layout->addStretch();
 
@@ -36,5 +38,6 @@ WeatherDisplay::~WeatherDisplay()
 void WeatherDisplay::handleRefresh(API::Response& response)
 {
     overview->handleRefresh(response);
+    hourlyGraph->handleRefresh(response);
     hourly->handleRefresh(response);
 }

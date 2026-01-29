@@ -15,6 +15,7 @@
 
 #include "api.h"
 #include "modules/hourly.h"
+#include "modules/hourly_graph.h"
 #include "modules/overview.h"
 
 class WeatherDisplay : public QScrollArea
@@ -27,6 +28,7 @@ private:
     QPointer<QWidget>     container      = nullptr;
     QPointer<QVBoxLayout> layout         = nullptr;
     QPointer<Overview>    overview       = nullptr;
+    QPointer<HourlyGraph> hourlyGraph    = nullptr;
     QPointer<Hourly>      hourly         = nullptr;
 
 public:

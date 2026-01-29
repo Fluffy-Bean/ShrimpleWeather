@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt6 6.8
-    REQUIRED COMPONENTS Core Widgets Network
+    REQUIRED COMPONENTS Core Widgets Charts Network
 )
 qt_standard_project_setup()
 
@@ -29,6 +29,8 @@ qt_add_executable(${PROJECT_NAME}
     src/modules/overview.cpp
     src/modules/hourly.h
     src/modules/hourly.cpp
+    src/modules/hourly_graph.h
+    src/modules/hourly_graph.cpp
 )
 
 qt_add_resources(${PROJECT_NAME}
@@ -40,9 +42,10 @@ qt_add_resources(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt::Core
-    Qt::Widgets
-    Qt::Network
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::Charts
+    Qt6::Network
 )
 
 install(
