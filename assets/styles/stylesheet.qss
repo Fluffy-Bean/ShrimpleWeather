@@ -8,6 +8,11 @@
     color: #171717;
 }
 
+#SearchBar {
+    background-color: #F5F4F2;
+    border-radius: 3px;
+}
+
 #SearchBar QLineEdit {
     padding: 0 8px;
     height: 30px;
@@ -16,11 +21,9 @@
     font-size: 13px;
     font-weight: 500;
 
-    background-color: #F5F4F2;
+    background-color: transparent;
     color: #171717;
     border: none;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
 }
 
 #SearchBar QPushButton {
@@ -32,19 +35,16 @@
     font-weight: 400;
     font-family: "Material Symbols Outlined";
 
-    background-color: #F5F4F2;
-    color: #171717;
-    border: none;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-#SearchBar QPushButton:hover {
     background-color: #4B4B31;
     color: #F5F4F2;
+    border: none;
+    border-radius: 3px;
+}
+#SearchBar QPushButton:hover {
+    background-color: #42422D;
 }
 #SearchBar QPushButton:pressed {
-   background-color: #3D3D27;
-    color: #F5F4F2;
+   background-color: #383827;
 }
 
 #SavedLocations QPushButton {
