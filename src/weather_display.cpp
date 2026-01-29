@@ -3,15 +3,16 @@
 WeatherDisplay::WeatherDisplay(QWidget* parent) : QScrollArea(parent)
 {
     setObjectName("WeatherDisplay");
-    setMinimumWidth(600);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setWidgetResizable(true);
+    setMinimumWidth(600);
     setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     container = new QWidget(this);
-    // container->setAttribute(Qt::WA_StyledBackground, true);
-    // container->setAutoFillBackground(true);
+    container->setObjectName("WeatherDisplayContainer");
+    container->setAttribute(Qt::WA_StyledBackground, true);
+    container->setAutoFillBackground(true);
 
     layout = new QVBoxLayout(container);
     layout->setAlignment(Qt::AlignHCenter);
