@@ -3,10 +3,9 @@
 Overview::Overview(QWidget* parent) : QWidget(parent)
 {
     setObjectName("Overview");
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     setAttribute(Qt::WA_StyledBackground, true);
     setAutoFillBackground(true);
-    setMaximumWidth(600);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);

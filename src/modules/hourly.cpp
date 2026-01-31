@@ -3,10 +3,10 @@
 Hourly::Hourly(QWidget* parent) : QWidget(parent)
 {
     setObjectName("Hourly");
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     setAttribute(Qt::WA_StyledBackground, true);
     setAutoFillBackground(true);
-    setMaximumWidth(600);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    setMaximumWidth(1000);
 
     layout = new QVBoxLayout(this);
     layout->setContentsMargins(16, 16, 16, 16);

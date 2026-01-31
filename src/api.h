@@ -14,18 +14,24 @@ namespace API
 
     struct Units
     {
+        QString rain                = "mm";
+        QString humidity            = "%";
         QString temperature         = "°C";
         QString apparentTemperature = "°C";
-        QString rain                = "mm";
+        QString windDirection       = "°";
+        QString windSpeed           = "km/h";
     };
 
     struct Weather
     {
-        QString  time                = "";
-        bool     isDay               = true;
-        double   rain                = 0;
-        double   temperature         = 0;
-        double   apparentTemperature = 0;
+        QString time                = "";
+        bool    isDay               = true;
+        double  rain                = 0;
+        double  humidity            = 0;
+        double  temperature         = 0;
+        double  apparentTemperature = 0;
+        double  windDirection       = 0;
+        double  windSpeed           = 0;
     };
 
     struct Response

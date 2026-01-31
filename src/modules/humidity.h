@@ -8,18 +8,17 @@
 
 #include "../api.h"
 
-class Overview : public QWidget
+class Humidity : public QWidget
 {
     Q_OBJECT
 
 private:
-    QPointer<QVBoxLayout> layout    = nullptr;
-    QPointer<QLabel>      townLabel = nullptr;
-    QPointer<QLabel>      tempLabel = nullptr;
+    QPointer<QVBoxLayout> layout           = nullptr;
+    QPointer<QLabel>      measurementLabel = nullptr;
 
 public:
-    Overview(QWidget* parent = nullptr);
-    ~Overview();
+    Humidity(QWidget* parent = nullptr);
+    ~Humidity();
 
 public slots:
     void handleRefresh(API::Response& response);

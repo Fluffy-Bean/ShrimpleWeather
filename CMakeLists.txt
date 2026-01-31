@@ -25,12 +25,18 @@ qt_add_executable(${PROJECT_NAME}
     src/saved_locations.cpp
     src/weather_display.h
     src/weather_display.cpp
+    src/module_section.h
+    src/module_section.cpp
     src/modules/overview.h
     src/modules/overview.cpp
     src/modules/hourly.h
     src/modules/hourly.cpp
     src/modules/hourly_graph.h
     src/modules/hourly_graph.cpp
+    src/modules/humidity.h
+    src/modules/humidity.cpp
+    src/modules/wind.h
+    src/modules/wind.cpp
 )
 
 qt_add_resources(${PROJECT_NAME}

@@ -3,11 +3,10 @@
 HourlyGraph::HourlyGraph(QWidget* parent) : QWidget(parent)
 {
     setObjectName("HourlyGraph");
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     setAttribute(Qt::WA_StyledBackground, true);
     setAutoFillBackground(true);
-    setMaximumWidth(600);
-    setMinimumHeight(300);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    setFixedHeight(300);
 
     layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -17,20 +16,20 @@ HourlyGraph::HourlyGraph(QWidget* parent) : QWidget(parent)
     lineSeries->clear();
     lineSeries->setVisible(true);
 
-    chart = new QChart();
-    chart->addSeries(lineSeries);
-    chart->setPlotAreaBackgroundVisible(true);
-    chart->legend()->hide();
-
-    QPointer<QValueAxis> axisX = new QValueAxis();
+    axisX = new QValueAxis();
     axisX->setRange(0, 0);
     axisX->setTickCount(10);
     axisX->setLabelFormat("%d");
 
-    QPointer<QValueAxis> axisY = new QValueAxis();
+    axisY = new QValueAxis();
     axisY->setRange(0, 0);
     axisY->setTickCount(1);
     axisY->setLabelFormat("%.2f");
+
+    chart = new QChart();
+    chart->addSeries(lineSeries);
+    chart->setPlotAreaBackgroundVisible(true);
+    chart->legend()->hide();
 
     chart->addAxis(axisX, Qt::AlignBottom);
     chart->addAxis(axisY, Qt::AlignLeft);
@@ -70,8 +69,8 @@ void HourlyGraph::handleRefresh(API::Response& response)
         lineSeries->append(i, value);
     }
 
-    chart->axes(Qt::Horizontal).at(0)->setRange(0, response.hourly.size());
-    chart->axes(Qt::Vertical).at(0)->setRange(min, max);
+    axisX->setRange(0, response.hourly.size());
+    axisY->setRange(min, max);
 
     chartView->repaint();
 }

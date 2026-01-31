@@ -19,6 +19,8 @@ class HourlyGraph : public QWidget
 private:
     QPointer<QVBoxLayout> layout     = nullptr;
     QPointer<QLineSeries> lineSeries = nullptr;
+    QPointer<QValueAxis>  axisX      = nullptr;
+    QPointer<QValueAxis>  axisY      = nullptr;
     QPointer<QChart>      chart      = nullptr;
     QPointer<QChartView>  chartView  = nullptr;
 

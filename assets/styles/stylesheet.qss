@@ -13,7 +13,7 @@
     border-radius: 3px;
 }
 
-#SearchBar QLineEdit {
+#SearchBar > QLineEdit {
     padding: 0 8px;
     height: 30px;
     min-width: 130px;
@@ -26,7 +26,7 @@
     border: none;
 }
 
-#SearchBar QPushButton {
+#SearchBar > QPushButton {
     padding: 0;
     height: 30px;
     width: 32px;
@@ -40,10 +40,10 @@
     border: none;
     border-radius: 3px;
 }
-#SearchBar QPushButton:hover {
+#SearchBar > QPushButton:hover {
     background-color: #42422D;
 }
-#SearchBar QPushButton:pressed {
+#SearchBar > QPushButton:pressed {
    background-color: #383827;
 }
 
@@ -89,29 +89,10 @@ QScrollBar::handle:vertical {
     background-color: #4B4B31;
     border-radius: 3px;
 }
-QScrollBar::sub-line:vertical {
-    height: 0px;
-    width: 0px;
-}
-QScrollBar::add-line:vertical {
-    height: 0px;
-    width: 0px;
-}
-QScrollBar::sub-line:vertical:hover,
-QScrollBar::sub-line:vertical:on {
-    height: 0px;
-    width: 0px;
-}
-QScrollBar::add-line:vertical:hover,
-QScrollBar::add-line:vertical:on {
-    height: 0px;
-    width: 0px;
-}
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical,
 QScrollBar::up-arrow:vertical,
-QScrollBar::down-arrow:vertical {
-    width: 0px;
-    height: 0px;
-}
+QScrollBar::down-arrow:vertical,
 QScrollBar::add-page:vertical,
 QScrollBar::sub-page:vertical {
     width: 0px;
@@ -142,12 +123,60 @@ QScrollBar::sub-page:vertical {
     color: #171717;
     border-radius: 3px;
 }
+
 #HourlyGraph QChartView {
     background-color: #FFFFFF;
+    border-radius: 3px;
 }
+
 #HourlyGraph QChart {
     background-color: #FFFFFF;
 }
+
 #HourlyGraph QLineSeries {
     background-color: #FFFFFF;
+}
+
+#Humidity {
+    background-color: #FFFFFF;
+    color: #171717;
+    border-radius: 3px;
+}
+
+#HumidityIcon {
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Material Symbols Outlined";
+}
+
+#HumidityLabel {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#HumidityMeasurement {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+#Wind {
+    background-color: #FFFFFF;
+    color: #171717;
+    border-radius: 3px;
+}
+
+#WindIcon {
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Material Symbols Outlined";
+}
+
+#WindLabel {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#WindMeasurement {
+    font-size: 22px;
+    font-weight: 800;
 }

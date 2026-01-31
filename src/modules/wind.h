@@ -8,18 +8,17 @@
 
 #include "../api.h"
 
-class Overview : public QWidget
+class Wind : public QWidget
 {
     Q_OBJECT
 
 private:
-    QPointer<QVBoxLayout> layout    = nullptr;
-    QPointer<QLabel>      townLabel = nullptr;
-    QPointer<QLabel>      tempLabel = nullptr;
+    QPointer<QVBoxLayout> layout           = nullptr;
+    QPointer<QLabel>      measurementLabel = nullptr;
 
 public:
-    Overview(QWidget* parent = nullptr);
-    ~Overview();
+    Wind(QWidget* parent = nullptr);
+    ~Wind();
 
 public slots:
     void handleRefresh(API::Response& response);

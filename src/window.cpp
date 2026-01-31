@@ -52,7 +52,7 @@ void Window::handleLocationSelection(API::Location& location)
 {
     currentLocation = location;
 
-    QString url = QString("https://api.open-meteo.com/v1/forecast?latitude=%1&longitude=%2&hourly=temperature_2m,apparent_temperature,rain&current=temperature_2m,rain,apparent_temperature,is_day")
+    QString url = QString("https://api.open-meteo.com/v1/forecast?latitude=%1&longitude=%2&hourly=temperature_2m,apparent_temperature,rain&current=temperature_2m,rain,apparent_temperature,is_day,relative_humidity_2m,wind_direction_10m,wind_speed_10m")
         .arg(location.latitude)
         .arg(location.longitude);
 
@@ -89,16 +89,22 @@ void Window::handleNetworkReply(QNetworkReply* reply)
         response.location = currentLocation;
 
         QJsonObject units                  = jsonObject.take("current_units").toObject();
+        response.units.rain                = units.take("rain").toString();
+        response.units.humidity            = units.take("relative_humidity_2m").toString();
         response.units.temperature         = units.take("temperature_2m").toString();
         response.units.apparentTemperature = units.take("apparent_temperature").toString();
-        response.units.rain                = units.take("rain").toString();
+        response.units.windDirection       = units.take("wind_direction_10m").toString();
+        response.units.windSpeed           = units.take("wind_speed_10m").toString();
 
         QJsonObject current                  = jsonObject.take("current").toObject();
         response.current.time                = current.take("time").toString();
         response.current.isDay               = current.take("is_day").toInt() == 1;
+        response.current.rain                = current.take("rain").toDouble();
+        response.current.humidity            = current.take("relative_humidity_2m").toDouble();
         response.current.temperature         = current.take("temperature_2m").toDouble();
         response.current.apparentTemperature = current.take("apparent_temperature").toDouble();
-        response.current.rain                = current.take("rain").toDouble();
+        response.current.windDirection       = current.take("wind_direction_10m").toDouble();
+        response.current.windSpeed           = current.take("wind_speed_10m").toDouble();
 
         QJsonObject hourly                    = jsonObject.take("hourly").toObject();
         QJsonArray  hourlyTime                = hourly.take("time").toArray();
@@ -111,9 +117,9 @@ void Window::handleNetworkReply(QNetworkReply* reply)
             API::Weather weather = {};
 
             weather.time                = hourlyTime.at(i).toString();
+            weather.rain                = hourlyRain.at(i).toDouble();
             weather.temperature         = hourlyTemperature.at(i).toDouble();
             weather.apparentTemperature = hourlyApparentTemperature.at(i).toDouble();
-            weather.rain                = hourlyRain.at(i).toDouble();
 
             response.hourly.append(weather);
         }
