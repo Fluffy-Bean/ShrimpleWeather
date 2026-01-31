@@ -22,7 +22,7 @@ SearchBar::SearchBar(QWidget* parent) : QWidget(parent)
     layout->addWidget(searchBox);
     layout->addWidget(searchButton);
 
-    connect(searchButton, &QPushButton::clicked, this, &SearchBar::handleClick);
+    assert(connect(searchButton, &QPushButton::clicked, this, &SearchBar::handleClick));
 
     setLayout(layout);
 }

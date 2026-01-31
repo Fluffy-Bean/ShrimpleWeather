@@ -1,10 +1,9 @@
 #include "window.h"
+#include "application.h"
 
 Window::Window(QWidget *parent) : QMainWindow(parent)
 {
     setObjectName("Window");
-
-    manager = new QNetworkAccessManager();
 
     {
         const int     fontID     = QFontDatabase::addApplicationFont(":/assets/fonts/MaterialSymbolsOutlined.ttf");
@@ -21,10 +20,14 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     }
 
     QFile file(":/assets/styles/stylesheet.qss");
-    file.open(QFile::ReadOnly);
-
-    QString style_sheet = QString(file.readAll());
-    setStyleSheet(style_sheet);
+    if (file.open(QFile::ReadOnly))
+    {
+        QString style_sheet = QString(file.readAll());
+        setStyleSheet(style_sheet);
+    }
+    else {
+        qWarning() << "Failed to load stylesheet";
+    }
 
     root = new QWidget(this);
     this->setCentralWidget(root);
@@ -39,95 +42,28 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     layout->addWidget(sideBar);
     layout->addWidget(weatherDisplay);
 
-    connect(sideBar, &SideBar::onLocationSelection, this, &Window::handleLocationSelection);
-    connect(manager, &QNetworkAccessManager::finished, this, &Window::handleNetworkReply);
+    assert(connect(sideBar, &SideBar::onLocationSelection, this, &Window::handleLocationSelection));
 }
 
 Window::~Window()
 {
-    delete manager;
 }
 
 void Window::handleLocationSelection(API::Location& location)
 {
-    currentLocation = location;
+    currentWeather.location = location;
 
-    QString url = QString("https://api.open-meteo.com/v1/forecast?latitude=%1&longitude=%2&hourly=temperature_2m,apparent_temperature,rain&current=temperature_2m,rain,apparent_temperature,is_day,relative_humidity_2m,wind_direction_10m,wind_speed_10m")
-        .arg(location.latitude)
-        .arg(location.longitude);
+    Application::api.getCurrentWeather(location, [](API::Weather& weather, void* data) {
+        Window* _this = static_cast<Window*>(data);
 
-    weatherReq.setUrl(QUrl(url));
+        _this->currentWeather.current = weather;
+        _this->weatherDisplay->handleRefresh(_this->currentWeather);
+    }, this);
 
-    manager->get(weatherReq);
-}
+    Application::api.getHourlyWeather(location, [](QList<API::Weather>& weather, void* data) {
+        Window* _this = static_cast<Window*>(data);
 
-void Window::handleNetworkReply(QNetworkReply* reply)
-{
-    if (reply == nullptr)
-    {
-        return;
-    }
-
-    if (reply->error())
-    {
-        qDebug() << reply->errorString();
-
-        return;
-    }
-
-    QNetworkRequest source         = reply->request();
-    QString         responseString = reply->readAll();
-    QJsonDocument   jsonResponse   = QJsonDocument::fromJson(responseString.toUtf8());
-    QJsonObject     jsonObject     = jsonResponse.object();
-
-    qDebug() << jsonObject;
-
-    if (source == weatherReq)
-    {
-        API::Response response = {};
-
-        response.location = currentLocation;
-
-        QJsonObject units                  = jsonObject.take("current_units").toObject();
-        response.units.rain                = units.take("rain").toString();
-        response.units.humidity            = units.take("relative_humidity_2m").toString();
-        response.units.temperature         = units.take("temperature_2m").toString();
-        response.units.apparentTemperature = units.take("apparent_temperature").toString();
-        response.units.windDirection       = units.take("wind_direction_10m").toString();
-        response.units.windSpeed           = units.take("wind_speed_10m").toString();
-
-        QJsonObject current                  = jsonObject.take("current").toObject();
-        response.current.time                = current.take("time").toString();
-        response.current.isDay               = current.take("is_day").toInt() == 1;
-        response.current.rain                = current.take("rain").toDouble();
-        response.current.humidity            = current.take("relative_humidity_2m").toDouble();
-        response.current.temperature         = current.take("temperature_2m").toDouble();
-        response.current.apparentTemperature = current.take("apparent_temperature").toDouble();
-        response.current.windDirection       = current.take("wind_direction_10m").toDouble();
-        response.current.windSpeed           = current.take("wind_speed_10m").toDouble();
-
-        QJsonObject hourly                    = jsonObject.take("hourly").toObject();
-        QJsonArray  hourlyTime                = hourly.take("time").toArray();
-        QJsonArray  hourlyTemperature         = hourly.take("temperature_2m").toArray();
-        QJsonArray  hourlyApparentTemperature = hourly.take("apparent_temperature").toArray();
-        QJsonArray  hourlyRain                = hourly.take("rain").toArray();
-
-        for (int i = 0; i < hourlyTime.size(); ++i)
-        {
-            API::Weather weather = {};
-
-            weather.time                = hourlyTime.at(i).toString();
-            weather.rain                = hourlyRain.at(i).toDouble();
-            weather.temperature         = hourlyTemperature.at(i).toDouble();
-            weather.apparentTemperature = hourlyApparentTemperature.at(i).toDouble();
-
-            response.hourly.append(weather);
-        }
-
-        weatherDisplay->handleRefresh(response);
-    }
-    else
-    {
-        qInfo() << "Unknown source of request";
-    }
+        _this->currentWeather.hourly = weather;
+        _this->weatherDisplay->handleRefresh(_this->currentWeather);
+    }, this);
 }

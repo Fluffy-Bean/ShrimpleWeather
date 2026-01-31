@@ -6,7 +6,7 @@
 #include <QString>
 #include <QWidget>
 
-#include "../api.h"
+#include "../api/open_meteo.h"
 
 class Overview : public QWidget
 {

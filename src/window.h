@@ -8,25 +8,22 @@
 #include <QPushButton>
 #include <QPointer>
 
-#include "api.h"
 #include "side_bar.h"
 #include "weather_display.h"
 #include "window.h"
+#include "api/open_meteo.h"
 
 class Window : public QMainWindow
 {
     Q_OBJECT
 
 private:
-    API::Location                   currentLocation = {};
+    API::Response            currentWeather  = {};
 
-    QPointer<QNetworkAccessManager> manager         = nullptr;
-    QNetworkRequest                 weatherReq      = {};
-
-    QPointer<QWidget>               root            = nullptr;
-    QPointer<QHBoxLayout>           layout      = nullptr;
-    QPointer<SideBar>               sideBar         = nullptr;
-    QPointer<WeatherDisplay>        weatherDisplay  = nullptr;
+    QPointer<QWidget>        root            = nullptr;
+    QPointer<QHBoxLayout>    layout          = nullptr;
+    QPointer<SideBar>        sideBar         = nullptr;
+    QPointer<WeatherDisplay> weatherDisplay  = nullptr;
 
 public:
     Window(QWidget* parent = nullptr);
@@ -34,5 +31,4 @@ public:
 
 private slots:
     void handleLocationSelection(API::Location& location);
-    void handleNetworkReply(QNetworkReply* reply);
 };

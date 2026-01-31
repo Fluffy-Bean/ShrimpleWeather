@@ -14,7 +14,8 @@ qt_standard_project_setup()
 
 qt_add_executable(${PROJECT_NAME}
     src/main.cpp
-    src/api.h
+    src/application.h
+    src/application.cpp
     src/window.h
     src/window.cpp
     src/side_bar.h
@@ -37,6 +38,8 @@ qt_add_executable(${PROJECT_NAME}
     src/modules/humidity.cpp
     src/modules/wind.h
     src/modules/wind.cpp
+    src/api/open_meteo.cpp
+    src/api/open_meteo.h
 )
 
 qt_add_resources(${PROJECT_NAME}

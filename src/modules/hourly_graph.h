@@ -10,7 +10,7 @@
 #include <QValueAxis>
 #include <QWidget>
 
-#include "../api.h"
+#include "../api/open_meteo.h"
 
 class HourlyGraph : public QWidget
 {

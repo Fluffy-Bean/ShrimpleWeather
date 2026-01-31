@@ -1,28 +1,22 @@
 #pragma once
 
-#include <QJsonArray>
-#include <QJsonObject>
 #include <QLayout>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QPointer>
 #include <QWidget>
 
-#include "api.h"
 #include "saved_locations.h"
 #include "search_bar.h"
+#include "api/open_meteo.h"
+#include "application.h"
 
 class SideBar : public QWidget
 {
     Q_OBJECT
 
 private:
-    QPointer<QNetworkAccessManager> manager        = nullptr;
-    QNetworkRequest                 locationReq    = {};
-
-    QPointer<QVBoxLayout>           layout         = nullptr;
-    QPointer<SearchBar>             searchBar      = nullptr;
-    QPointer<SavedLocations>        savedLocations = nullptr;
+    QPointer<QVBoxLayout>    layout         = nullptr;
+    QPointer<SearchBar>      searchBar      = nullptr;
+    QPointer<SavedLocations> savedLocations = nullptr;
 
 public:
     SideBar(QWidget* parent = nullptr);
@@ -30,7 +24,6 @@ public:
 
 private slots:
     void handleSearch(QStringView query);
-    void handleNetworkReply(QNetworkReply* reply);
 
 signals:
     void onLocationSelection(API::Location& location);

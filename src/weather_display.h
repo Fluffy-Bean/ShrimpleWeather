@@ -13,7 +13,7 @@
 #include <QPointer>
 #include <QWidget>
 
-#include "api.h"
+#include "api/open_meteo.h"
 #include "modules/hourly.h"
 #include "modules/hourly_graph.h"
 #include "modules/humidity.h"
