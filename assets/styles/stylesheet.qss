@@ -6,11 +6,7 @@
 #SideBar {
     background-color: #FFFFFF;
     color: #171717;
-}
-
-#SearchBar {
-    background-color: #F5F4F2;
-    border-radius: 3px;
+    border-right: 1px solid #EEEEEE;
 }
 
 #SearchBar > QLineEdit {
@@ -21,9 +17,14 @@
     font-size: 13px;
     font-weight: 500;
 
-    background-color: transparent;
+    background-color: #FFFFFF;
     color: #171717;
-    border: none;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    border-left: 1px solid #EEEEEE;
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 #SearchBar > QPushButton {
@@ -38,13 +39,19 @@
     background-color: #4B4B31;
     color: #F5F4F2;
     border: none;
-    border-radius: 3px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 #SearchBar > QPushButton:hover {
     background-color: #42422D;
 }
 #SearchBar > QPushButton:pressed {
    background-color: #383827;
+}
+
+#SavedLocations {
+    border: none;
+    background-color: transparent;
 }
 
 #SavedLocations QPushButton {
@@ -59,7 +66,7 @@
     background-color: #FFFFFF;
     color: #171717;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 #SavedLocations QPushButton:hover {
     background-color: #F5F4F2;
@@ -74,12 +81,12 @@
     color: #171717;
 }
 #WeatherDisplayContainer {
-    background-color: #F5F4F2;
+    background-color: transparent;
 }
 QScrollBar:vertical {
     width: 6px;
 
-    background-color: #F5F4F2;
+    background-color: transparent;
     border: none;
     border-radius: 0px;
 }
@@ -87,7 +94,7 @@ QScrollBar::handle:vertical {
     min-height: 6px;
 
     background-color: #4B4B31;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 QScrollBar::sub-line:vertical,
 QScrollBar::add-line:vertical,
@@ -112,21 +119,10 @@ QScrollBar::sub-page:vertical {
     font-weight: 700;
 }
 
-#Hourly {
-    background-color: #FFFFFF;
-    color: #171717;
-    border-radius: 3px;
-}
-
-#HourlyGraph {
-    background-color: #FFFFFF;
-    color: #171717;
-    border-radius: 3px;
-}
-
 #HourlyGraph QChartView {
     background-color: #FFFFFF;
-    border-radius: 3px;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
 }
 
 #HourlyGraph QChart {
@@ -139,8 +135,8 @@ QScrollBar::sub-page:vertical {
 
 #Humidity {
     background-color: #FFFFFF;
-    color: #171717;
-    border-radius: 3px;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
 }
 
 #HumidityIcon {
@@ -161,8 +157,8 @@ QScrollBar::sub-page:vertical {
 
 #Wind {
     background-color: #FFFFFF;
-    color: #171717;
-    border-radius: 3px;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
 }
 
 #WindIcon {

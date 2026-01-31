@@ -11,8 +11,8 @@ SideBar::SideBar(QWidget* parent) : QWidget(parent)
 
     layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignTop);
-    layout->setContentsMargins(16, 16, 16, 16);
-    layout->setSpacing(16);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
     searchBar = new SearchBar(this);
     savedLocations = new SavedLocations(this);

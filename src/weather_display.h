@@ -27,8 +27,6 @@ class WeatherDisplay : public QScrollArea
 private:
     API::Response         currentWeather = {};
 
-    QPointer<QWidget>     container      = nullptr;
-    QPointer<QVBoxLayout> layout         = nullptr;
     QPointer<Overview>    overview       = nullptr;
     QPointer<HourlyGraph> hourlyGraph    = nullptr;
     QPointer<Humidity>    humidity       = nullptr;

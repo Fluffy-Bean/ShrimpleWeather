@@ -4,7 +4,7 @@ ModuleSection::ModuleSection(QWidget* parent) : QWidget(parent)
 {
     setObjectName("ModuleSection");
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    setMaximumWidth(1000);
+    setMaximumWidth(800);
 
     layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);

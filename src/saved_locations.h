@@ -5,9 +5,10 @@
 #include <QList>
 #include <QPointer>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QWidget>
 
-class SavedLocations : public QWidget
+class SavedLocations : public QScrollArea
 {
     Q_OBJECT
 
@@ -16,7 +17,6 @@ public:
     ~SavedLocations();
 
 private:
-    QPointer<QVBoxLayout>        layout            = nullptr;
     QList<QPointer<QPushButton>> locationButtons = {};
 
 private slots:

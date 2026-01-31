@@ -3,12 +3,10 @@
 SearchBar::SearchBar(QWidget* parent) : QWidget(parent)
 {
     setObjectName("SearchBar");
-    setAttribute(Qt::WA_StyledBackground, true);
-    setAutoFillBackground(true);
 
     layout = new QHBoxLayout(this);
     layout->setAlignment(Qt::AlignCenter);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins(16, 16, 16, 0);
     layout->setSpacing(0);
 
     searchBox = new QLineEdit(this);

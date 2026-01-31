@@ -1,18 +1,24 @@
 #include "saved_locations.h"
 
-SavedLocations::SavedLocations(QWidget* parent) : QWidget(parent)
+SavedLocations::SavedLocations(QWidget* parent) : QScrollArea(parent)
 {
     setObjectName("SavedLocations");
-    setAttribute(Qt::WA_StyledBackground, true);
-    setAutoFillBackground(true);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setWidgetResizable(true);
 
-    layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
+    QPointer<QWidget> container = new QWidget(this);
+    container->setObjectName("WeatherDisplayContainer");
+    container->setAttribute(Qt::WA_StyledBackground, true);
+    container->setAutoFillBackground(true);
+
+    QPointer<QVBoxLayout> layout = new QVBoxLayout(container);
+    layout->setContentsMargins(16, 16, 16, 16);
     layout->setSpacing(0);
 
     for (int i = 0; i < 10; ++i)
     {
-        QPointer<QPushButton> button = new QPushButton(this);
+        QPointer<QPushButton> button = new QPushButton(container);
         button->setFlat(true);
         button->setText("Location Button");
 
@@ -20,7 +26,9 @@ SavedLocations::SavedLocations(QWidget* parent) : QWidget(parent)
         layout->addWidget(button);
     }
 
-    setLayout(layout);
+    layout->addStretch();
+
+    setWidget(container);
 }
 
 SavedLocations::~SavedLocations()
