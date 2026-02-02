@@ -54,25 +54,33 @@
     background-color: transparent;
 }
 
-#SavedLocations QPushButton {
-    padding: 0 8px;
-    height: 50px;
-    min-width: 80px;
+#SavedLocations QHBoxLayout {
+    background-color: transparent;
+}
 
-    font-size: 13px;
-    font-weight: 500;
-    text-align: left;
+#SavedLocationsButton {
+    height: 45px;
 
     background-color: #FFFFFF;
     color: #171717;
     border: none;
-    border-radius: 4px;
 }
-#SavedLocations QPushButton:hover {
-    background-color: #F5F4F2;
+#SavedLocationsButton:hover {
+    background-color: #F9F8F6;
 }
-#SavedLocations QPushButton:pressed {
-    background-color: #F5F4F2;
+#SavedLocationsButton:pressed {
+    background-color: #F9F8F6;
+}
+
+#SavedLocationsButtonIcon {
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Material Symbols Outlined";
+}
+
+#SavedLocationsButtonLabel {
+    font-size: 13px;
+    font-weight: 500;
 }
 
 #WeatherDisplay {

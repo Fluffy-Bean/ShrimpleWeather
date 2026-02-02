@@ -17,6 +17,7 @@ private:
     QPointer<QVBoxLayout>    layout         = nullptr;
     QPointer<SearchBar>      searchBar      = nullptr;
     QPointer<SavedLocations> savedLocations = nullptr;
+    int                      onLocationSelect;
 
 public:
     SideBar(QWidget* parent = nullptr);

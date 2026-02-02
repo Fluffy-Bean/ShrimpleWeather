@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
 #include <QList>
@@ -12,16 +13,16 @@ class SavedLocations : public QScrollArea
 {
     Q_OBJECT
 
+private:
+    QList<QPointer<QPushButton>> locationButtons = {};
+
 public:
     SavedLocations(QWidget* parent = nullptr);
     ~SavedLocations();
 
 private:
-    QList<QPointer<QPushButton>> locationButtons = {};
-
-private slots:
-    void handleClick();
+    QPointer<QPushButton> makeLocationButton(QWidget* parent, const QString& name);
 
 signals:
-    void onSearch(QStringView query);
+    void onLocationSelect(QStringView query);
 };

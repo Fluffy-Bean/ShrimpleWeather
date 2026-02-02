@@ -9,7 +9,7 @@ SideBar::SideBar(QWidget* parent) : QWidget(parent)
 
     layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignTop);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins(0, 0, 1, 0); // 1px to avoid border
     layout->setSpacing(0);
 
     searchBar = new SearchBar(this);
@@ -21,6 +21,7 @@ SideBar::SideBar(QWidget* parent) : QWidget(parent)
     setLayout(layout);
 
     assert(connect(searchBar, &SearchBar::onSearch, this, &SideBar::handleSearch));
+    assert(connect(savedLocations, &SavedLocations::onLocationSelect, this, &SideBar::handleSearch));
 }
 
 SideBar::~SideBar()

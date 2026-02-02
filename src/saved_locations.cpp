@@ -13,15 +13,21 @@ SavedLocations::SavedLocations(QWidget* parent) : QScrollArea(parent)
     container->setAutoFillBackground(true);
 
     QPointer<QVBoxLayout> layout = new QVBoxLayout(container);
-    layout->setContentsMargins(16, 16, 16, 16);
+    layout->setContentsMargins(0, 16, 0, 16);
     layout->setSpacing(0);
 
-    for (int i = 0; i < 10; ++i)
-    {
-        QPointer<QPushButton> button = new QPushButton(container);
-        button->setFlat(true);
-        button->setText("Location Button");
+    QList<QString> locations = {
+        "London",
+        "Oslo",
+        "Berlin",
+        "Zurich",
+        "Warsaw",
+        "Paris",
+    };
 
+    for (int i = 0; i < locations.size(); ++i)
+    {
+        QPointer<QPushButton> button = makeLocationButton(this, locations.at(i));
         locationButtons.append(button);
         layout->addWidget(button);
     }
@@ -37,6 +43,38 @@ SavedLocations::~SavedLocations()
     locationButtons.clear();
 }
 
-void SavedLocations::handleClick()
+QPointer<QPushButton> SavedLocations::makeLocationButton(QWidget* parent, const QString& name)
 {
+    QPointer<QPushButton> button = new QPushButton(parent);
+    button->setObjectName("SavedLocationsButton");
+    button->setFlat(true);
+
+    QPointer<QWidget>     root   = new QWidget(button);
+    QPointer<QHBoxLayout> layout = new QHBoxLayout(button);
+    layout->setContentsMargins(16, 0, 16, 0);
+    layout->setSpacing(8);
+    layout->setAlignment(Qt::AlignLeft);
+
+    {
+        QPointer<QLabel> label = new QLabel(root);
+        label->setObjectName("SavedLocationsButtonIcon");
+        label->setText("weather_hail");
+        layout->addWidget(label);
+    }
+
+    {
+        QPointer<QLabel> label = new QLabel(root);
+        label->setObjectName("SavedLocationsButtonName");
+        label->setText(name);
+        layout->addWidget(label);
+    }
+
+    layout->addStretch();
+
+    assert(connect(button, &QPushButton::clicked, [=]() {
+        emit onLocationSelect(name);
+    }));
+
+    return button;
 }
+
