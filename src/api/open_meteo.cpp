@@ -95,8 +95,6 @@ void OpenMeteo::getLocationsByName(const QStringView query, const int count, Loc
 
 void OpenMeteo::handleNetworkReply(QNetworkReply* reply)
 {
-    reply->deleteLater();
-
     ResponseContainer response = {};
     for (int i = 0; i < requests.size(); ++i)
     {
@@ -107,8 +105,13 @@ void OpenMeteo::handleNetworkReply(QNetworkReply* reply)
             break;
         }
     }
+
     if (response.request != reply->request())
     {
+        qDebug() << "Could not find request owner";
+
+        reply->deleteLater();
+
         return;
     }
 
@@ -116,11 +119,15 @@ void OpenMeteo::handleNetworkReply(QNetworkReply* reply)
     {
         qDebug() << reply->errorString();
 
+        reply->deleteLater();
+
         return;
     }
 
     const QString     replyString = reply->readAll();
     const QJsonObject replyObject = QJsonDocument::fromJson(replyString.toUtf8()).object();
+
+    reply->deleteLater();
 
     switch (response.kind) {
     case ResponseKind::CurrentWeather: {
