@@ -95,6 +95,8 @@ void OpenMeteo::getLocationsByName(const QStringView query, const int count, Loc
 
 void OpenMeteo::handleNetworkReply(QNetworkReply* reply)
 {
+    reply->deleteLater();
+
     ResponseContainer response = {};
     for (int i = 0; i < requests.size(); ++i)
     {
